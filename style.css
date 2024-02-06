@@ -1,9 +1,7 @@
 body {
   font-family: "Inter", sans-serif;
-  /* min-height: 100vh; */
   width: 100%;
   margin: 0px;
-  /* border: 5px solid black; */
 }
 * {
   box-sizing: border-box;
@@ -14,14 +12,12 @@ main {
   margin-top: 20px;
   display: grid;
   grid-template-columns: 1.5fr 2fr;
-  border: 2px dotted black;
   /* height: 100vh; */
   gap: 90px;
 }
 
 /* styling for left section of main  */
 .left-section {
-  border: 1px solid green;
   display: flex;
   flex-direction: column;
   padding: 5px;
@@ -30,7 +26,6 @@ main {
 }
 .upper-part-img {
   max-height: 450px;
-  border: 1px solid red;
   border-radius: 10px;
   width: 100%;
 }
@@ -41,7 +36,6 @@ main {
 }
 .lower-part-imgs {
   display: flex;
-  border: 1px solid dodgerblue;
   justify-content: space-around;
   gap: 3px;
 }
@@ -59,7 +53,6 @@ main {
 .right-section {
   display: flex;
   flex-direction: column;
-  border: 2px solid firebrick;
   padding: 5px;
   gap: 10px;
 }
@@ -77,6 +70,9 @@ main {
 .check-boxes {
   display: flex;
   gap: 15px;
+}
+.check-boxes:hover {
+  cursor: pointer;
 }
 .checkbox {
   width: 50px;
@@ -113,7 +109,10 @@ main {
   justify-content: center;
   align-items: center;
   width: 25px;
-  border: 1px solid rgb(174, 170, 170);
+  border: 1px solid #b9bbbf;
+}
+.radio-boxes:hover {
+  cursor: pointer;
 }
 .radio-boxes {
   display: flex;
@@ -127,13 +126,12 @@ main {
 .counter-add-tocart {
   display: flex;
   gap: 20px;
-  border: 2px solid red;
   margin: 20px 0px;
+  margin-left: 30px;
 }
 .counter {
   display: flex;
   width: 120px;
-  border: 1px solid red;
   justify-content: space-between;
   align-items: center;
   background: #eae8e8;
@@ -142,6 +140,9 @@ main {
   font-weight: 900;
 
   border-radius: 15px;
+}
+.beg {
+  height: 300px !important;
 }
 .counter button {
   border: none;
@@ -152,7 +153,6 @@ main {
   width: 30px;
 }
 .add-to-cart {
-  border: 2px solid rebeccapurple;
   width: 200px;
   display: flex;
   justify-content: center;
@@ -164,6 +164,11 @@ main {
   background: #3a4980;
   color: white;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  gap: 13px;
 }
 .add-to-cart button:hover {
   cursor: pointer;
@@ -185,7 +190,6 @@ main {
   gap: 5px;
 }
 .all-radios {
-  /* border: 3px solid rebeccapurple; */
   display: flex;
   gap: 20px;
 }
@@ -203,7 +207,7 @@ main {
 }
 .underline {
   position: absolute;
-  top: -7px;
+  top: -5px;
   left: 0px;
 }
 .price {
@@ -219,6 +223,9 @@ main {
   flex-direction: column;
   gap: 5px;
 }
+.border-radio {
+  border: 1px solid #3a4980;
+}
 .colors-box {
   display: flex;
   flex-direction: column;
@@ -226,4 +233,43 @@ main {
 }
 .Description {
   color: #b9bbbf;
+}
+.text-blue {
+  color: #3a4980;
+  font-weight: 800px;
+}
+.show-beg {
+  display: block !important;
+  font-size: 18px !important;
+}
+
+@media (max-width: 1025px) {
+  main {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 4px;
+  }
+}
+@media (max-width: 700px) {
+  .all-radios {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .all-radios {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .add-to-cart {
+    width: 140px;
+  }
+  .counter-add-tocart {
+    margin-left: 2px;
+  }
+  .box-thumbnail {
+    height: 70px;
+    width: 70px;
+  }
 }

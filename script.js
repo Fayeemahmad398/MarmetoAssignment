@@ -1,7 +1,7 @@
 const rightSection = document.getElementsByClassName("right-section")[0];
 const leftSection = document.getElementsByClassName("left-section")[0];
 let defaultImg =
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuJhajFxlmV7z28PjobcPjua_aa-tCuihzbg&usqp=CAU";
+  "https://s3-alpha-sig.figma.com/img/d636/7d6d/f34ce14e7187edeeb026d73413e4a29c?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=PuX3Mn0c5KKkJu-GYfRIacoZToYwcoPxPdpsOIgIBHnYHIc-BkVC48FiBei-7ctsQD8eYN9MLrIvqfzCcfskZ7clpMLNUXPWgQ8dZZi2emW2OZsPm5DBQds7QhghzP4bCOGWoHsGmsTIe~rSiohVkWN~3idFpE4Z6HMuBrL-liLC1~FwmxEU3ReQfP4ZvPVMym2GZ5hHf-grScez-XoK2acEriQdoBa-wrkqxg-zlYVN4RV9Ll3JLuuuDHRj8j53yWR28ViXVBYMLPbkosXiFJh3ruphXNrmOB~AYVOPoWpZVNIEp5V8HBDBM-y-zb~hhlHS8SUjY4hvoOfQxNEx8w__";
 let countToshow;
 // --------------------------------------
 let productInfo = {};
@@ -18,9 +18,13 @@ let selectedProduct = {
 };
 // -------------------------------------
 
+function resetAllInfo() {
+  let listOfcolors = document.getElementsByClassName("material-icons");
+  console.log(listOfcolors);
+}
+
 function SelectColor(color) {
   let listOfcolors = document.getElementsByClassName("material-icons");
-
   for (let i = 0; i < listOfcolors.length; i++) {
     listOfcolors[i].classList.remove("show");
   }
@@ -30,17 +34,26 @@ function SelectColor(color) {
 }
 
 function SelectSize(size) {
+  const sizes = document.getElementsByClassName("radio-boxes");
+
   const list = document.getElementsByClassName("radio");
   for (let i = 0; i < list.length; i++) {
     list[i].classList.remove("blue-color");
   }
+  for (let i = 0; i < sizes.length; i++) {
+    sizes[i].classList.remove("text-blue");
+    sizes[i].children[0].classList.remove("border-radio");
+  }
 
-  size.children[1].children[0].classList.add("blue-color");
+  size.classList.add("text-blue");
+  size.children[0].children[0].classList.add("blue-color");
+  size.children[0].classList.add("border-radio");
 
   selectedProduct = { ...selectedProduct, size: size.id };
 }
 
 function AddToCart() {
+  console.log(selectedProduct);
   const messageEle = document.getElementsByClassName("Message-of-buy")[0];
   selectedProduct = {
     ...selectedProduct,
@@ -52,16 +65,7 @@ function AddToCart() {
   messageEle.textContent = `${selectedProduct.title} with color ${selectedProduct.color} and size ${selectedProduct.size} added to cart. `;
   CartsProducts.push(selectedProduct);
   localStorage.setItem("cartsProducts", JSON.stringify(CartsProducts));
-
-  selectedProduct = {
-    color: "Yellow",
-    noOfproducts: noOfproducts,
-    price: "$12999",
-    productType: "Cloth",
-    size: "Small",
-    title: "Embrace Sideboard",
-  };
-  console.log(selectedProduct);
+  document.getElementsByClassName("Message-of-buy")[0].style.display = "block";
 }
 
 function countNoOfproducts(btn) {
@@ -91,19 +95,19 @@ function showProductOnUI() {
     </div>
     <div>
     <div class="cut-price">
-    <div class="underline">________</div>
-    <div>${productInfo.compare_at_price}</div>
+    <div class="underline">___________</div>
+    <div>${productInfo.compare_at_price}.00</div>
     </div>
     
     </div>
   </div>
   <hr />
   <div class="colors-box">
-    <p>choose a color</p>
+    <p>Choose a color</p>
     <div class="check-boxes">
       <div class="checkbox" onclick="SelectColor(this)" 
       id="Yellow" style="background-color:${productInfo?.options[0]?.values[0]?.Yellow}">
-      <span class="material-icons">done</span>
+      <span class="material-icons show">done</span>
             
       </div>
       <div class="checkbox" onclick="SelectColor(this)" 
@@ -123,15 +127,15 @@ function showProductOnUI() {
   </div>
   <hr />
   <div class="sizes-box">
-    <p>choose a size</p>
+    <p>Choose a size</p>
     <div class ="all-radios">
             <div class="radio-boxes" onclick="SelectSize(this)" id=${productInfo.options[1].values[0]}>
-            <div class="radio-box">
+            <div class="radio-box border-radio">
                 <div class="radio blue-color">
                 
                 </div>
                 </div>
-                <div>small</div>
+                <div>Small</div>
             </div>
             <div class="radio-boxes" onclick="SelectSize(this)" id=${productInfo.options[1].values[1]}>
             <div class="radio-box">
@@ -169,8 +173,14 @@ function showProductOnUI() {
       <div id="countProducts">1</div>
       <button onclick="countNoOfproducts(this)" value="incre">+</button>
     </div>
+
     <div class="add-to-cart">
-      <button onclick="AddToCart()">Add to Cart</button>
+  
+    <div>
+    </div>
+    <button onclick="AddToCart()">
+    <span class="material-icons show-beg">shopping_bag</span>
+    Add to Cart</button>
     </div>
   </div>
   <div class="Message-of-buy"></div>
@@ -180,6 +190,8 @@ function showProductOnUI() {
        
     
     `;
+
+  document.getElementsByClassName("Message-of-buy")[0].style.display = "none";
 }
 
 function showLeftPartOfUI() {
