@@ -13,7 +13,7 @@ let selectedProduct = {
   noOfproducts: noOfproducts,
   price: "$12999",
   productType: "Cloth",
-  size: "X",
+  size: "Small",
   title: "Embrace Sideboard",
 };
 // -------------------------------------
